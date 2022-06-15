@@ -1,0 +1,82 @@
+﻿@model Payroll_Mvc.LeaveEmp
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LeaveEmp</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StartLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Enddate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enddate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Numoffdays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numoffdays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reason)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reason)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Applydate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Applydate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Leavedate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Leavedate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Approved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Approved)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.User_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.User_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    <a href="~/Login/Redirect/" " class="btn btn-default" style=" background-color:cornflowerblue">Back</a>
+</p>

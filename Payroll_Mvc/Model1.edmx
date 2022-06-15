@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="User_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Joined_on" Type="datetime" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="User_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Joined_On" Type="datetime" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LeaveEmp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_id" Type="int" />
+          <Property Name="StartLeave" Type="date" />
+          <Property Name="Enddate" Type="date" />
+          <Property Name="Numoffdays" Type="int" />
+          <Property Name="Reason" Type="varchar" MaxLength="50" />
+          <Property Name="Applydate" Type="date" />
+          <Property Name="Leavedate" Type="date" />
+          <Property Name="Approved" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="salaryreport">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_id" Type="int" />
+          <Property Name="User_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Month" Type="date" />
+          <Property Name="Salary" Type="float" />
+          <Property Name="PfAmount" Type="float" />
+          <Property Name="Esi" Type="float" />
+          <Property Name="ProffessionalTax" Type="float" />
+          <Property Name="Total" Type="float" />
+        </EntityType>
+        <EntityType Name="TimeSheet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_id" Type="int" />
+          <Property Name="Complete_Date" Type="datetime" />
+          <Property Name="WorkhastobeDone" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Worksheet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_id" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="LunchBreak" Type="varchar(max)" />
+          <Property Name="WorkDone" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK__LeaveEmp__User_i__3C69FB99">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LeaveEmp" Type="Self.LeaveEmp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="LeaveEmp">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__salaryrep__User___3F466844">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="salaryreport" Type="Self.salaryreport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="salaryreport">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TimeSheet__User___45F365D3">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TimeSheet" Type="Self.TimeSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="TimeSheet">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Worksheet__User___4222D4EF">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Worksheet" Type="Self.Worksheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Worksheet">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PayModelStoreContainer">
+          <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveEmp" EntityType="Self.LeaveEmp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salaryreport" EntityType="Self.salaryreport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeSheet" EntityType="Self.TimeSheet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Worksheet" EntityType="Self.Worksheet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__LeaveEmp__User_i__3C69FB99" Association="Self.FK__LeaveEmp__User_i__3C69FB99">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="LeaveEmp" EntitySet="LeaveEmp" />
+          </AssociationSet>
+          <AssociationSet Name="FK__salaryrep__User___3F466844" Association="Self.FK__salaryrep__User___3F466844">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="salaryreport" EntitySet="salaryreport" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TimeSheet__User___45F365D3" Association="Self.FK__TimeSheet__User___45F365D3">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="TimeSheet" EntitySet="TimeSheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Worksheet__User___4222D4EF" Association="Self.FK__Worksheet__User___4222D4EF">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Worksheet" EntitySet="Worksheet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Joined_on" Type="DateTime" Precision="3" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Joined_On" Type="DateTime" Precision="3" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LeaveEmps" Relationship="Self.FK__LeaveEmp__User_i__3C69FB99" FromRole="Employee" ToRole="LeaveEmp" />
+          <NavigationProperty Name="salaryreports" Relationship="Self.FK__salaryrep__User___3F466844" FromRole="Employee" ToRole="salaryreport" />
+          <NavigationProperty Name="TimeSheets" Relationship="Self.FK__TimeSheet__User___45F365D3" FromRole="Employee" ToRole="TimeSheet" />
+          <NavigationProperty Name="Worksheets" Relationship="Self.FK__Worksheet__User___4222D4EF" FromRole="Employee" ToRole="Worksheet" />
+        </EntityType>
+        <EntityType Name="LeaveEmp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_id" Type="Int32" />
+          <Property Name="StartLeave" Type="DateTime" Precision="0" />
+          <Property Name="Enddate" Type="DateTime" Precision="0" />
+          <Property Name="Numoffdays" Type="Int32" />
+          <Property Name="Reason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Applydate" Type="DateTime" Precision="0" />
+          <Property Name="Leavedate" Type="DateTime" Precision="0" />
+          <Property Name="Approved" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__LeaveEmp__User_i__3C69FB99" FromRole="LeaveEmp" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="salaryreport">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_id" Type="Int32" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Month" Type="DateTime" Precision="0" />
+          <Property Name="Salary" Type="Double" />
+          <Property Name="PfAmount" Type="Double" />
+          <Property Name="Esi" Type="Double" />
+          <Property Name="ProffessionalTax" Type="Double" />
+          <Property Name="Total" Type="Double" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__salaryrep__User___3F466844" FromRole="salaryreport" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="TimeSheet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_id" Type="Int32" />
+          <Property Name="Complete_Date" Type="DateTime" Precision="3" />
+          <Property Name="WorkhastobeDone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__TimeSheet__User___45F365D3" FromRole="TimeSheet" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Worksheet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_id" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="LunchBreak" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WorkDone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Worksheet__User___4222D4EF" FromRole="Worksheet" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK__LeaveEmp__User_i__3C69FB99">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LeaveEmp" Type="Self.LeaveEmp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="LeaveEmp">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__salaryrep__User___3F466844">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="salaryreport" Type="Self.salaryreport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="salaryreport">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TimeSheet__User___45F365D3">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TimeSheet" Type="Self.TimeSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="TimeSheet">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Worksheet__User___4222D4EF">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Worksheet" Type="Self.Worksheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Worksheet">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PayEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrators" EntityType="Self.Administrator" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="LeaveEmps" EntityType="Self.LeaveEmp" />
+          <EntitySet Name="salaryreports" EntityType="Self.salaryreport" />
+          <EntitySet Name="TimeSheets" EntityType="Self.TimeSheet" />
+          <EntitySet Name="Worksheets" EntityType="Self.Worksheet" />
+          <AssociationSet Name="FK__LeaveEmp__User_i__3C69FB99" Association="Self.FK__LeaveEmp__User_i__3C69FB99">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="LeaveEmp" EntitySet="LeaveEmps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__salaryrep__User___3F466844" Association="Self.FK__salaryrep__User___3F466844">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="salaryreport" EntitySet="salaryreports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TimeSheet__User___45F365D3" Association="Self.FK__TimeSheet__User___45F365D3">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="TimeSheet" EntitySet="TimeSheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Worksheet__User___4222D4EF" Association="Self.FK__Worksheet__User___4222D4EF">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Worksheet" EntitySet="Worksheets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PayModelStoreContainer" CdmEntityContainer="PayEntities1">
+          <EntitySetMapping Name="Administrators">
+            <EntityTypeMapping TypeName="PayModel.Administrator">
+              <MappingFragment StoreEntitySet="Administrator">
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Joined_on" ColumnName="Joined_on" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="PayModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Joined_On" ColumnName="Joined_On" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveEmps">
+            <EntityTypeMapping TypeName="PayModel.LeaveEmp">
+              <MappingFragment StoreEntitySet="LeaveEmp">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="StartLeave" ColumnName="StartLeave" />
+                <ScalarProperty Name="Enddate" ColumnName="Enddate" />
+                <ScalarProperty Name="Numoffdays" ColumnName="Numoffdays" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Applydate" ColumnName="Applydate" />
+                <ScalarProperty Name="Leavedate" ColumnName="Leavedate" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salaryreports">
+            <EntityTypeMapping TypeName="PayModel.salaryreport">
+              <MappingFragment StoreEntitySet="salaryreport">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="PfAmount" ColumnName="PfAmount" />
+                <ScalarProperty Name="Esi" ColumnName="Esi" />
+                <ScalarProperty Name="ProffessionalTax" ColumnName="ProffessionalTax" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeSheets">
+            <EntityTypeMapping TypeName="PayModel.TimeSheet">
+              <MappingFragment StoreEntitySet="TimeSheet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Complete_Date" ColumnName="Complete_Date" />
+                <ScalarProperty Name="WorkhastobeDone" ColumnName="WorkhastobeDone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Worksheets">
+            <EntityTypeMapping TypeName="PayModel.Worksheet">
+              <MappingFragment StoreEntitySet="Worksheet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LunchBreak" ColumnName="LunchBreak" />
+                <ScalarProperty Name="WorkDone" ColumnName="WorkDone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

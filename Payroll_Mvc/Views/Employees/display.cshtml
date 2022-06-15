@@ -1,0 +1,36 @@
+﻿@model Payroll_Mvc.Employee
+
+@{
+    ViewBag.Title = "display";
+}
+
+<h2>display</h2>
+<table class="table table-primary">
+    <tr>
+        <th>Id</th>
+        <th>name</th>
+        <th>Joined_Date</th>
+        <th>Email</th>
+        <th>Age</th>
+    </tr>
+    <tr>
+        <td>@Model.User_id</td>
+        <td>@Model.User_Name</td>
+        <td>@Model.Joined_On</td>
+        <td>@Model.Email</td>
+        <td>@Model.Age</td>
+    </tr>
+    @Html.ActionLink("Edit", "Edit", new { id = @Model.User_id })
+
+    <a href="~/LeaveEmps/LeaveIndex1/@Model.User_id" class="btn btn-default" style=" background-color:cornflowerblue">Leave</a>
+
+    <a href="~/salaryreports/SalaryView1/@Model.User_id" class="btn btn-default" style=" background-color:cornflowerblue">Salary Details</a>
+
+    <a href="~/Employees/Work_sheet" class="btn btn-default" style=" background-color:cornflowerblue">Worh Sheet</a>
+
+    <a href="~/LeaveEmps/LeaveIndex2/@Model.User_id" class="btn btn-default" style=" background-color:cornflowerblue">Leave Status</a>
+
+    <a href="~/Employees/Display1/@Model.User_id" class="btn btn-default" style=" background-color:cornflowerblue">Time Sheet</a>
+
+
+</table>

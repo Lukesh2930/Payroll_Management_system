@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Payroll_Mvc.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User_id)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.User_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Joined_On)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.User_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.User_Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Joined_On)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Age)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Password)
+    </td>
+    <td>
+        @Html.ActionLink("Delete", "Delete", new { id = item.User_id }) |
+        @Html.ActionLink("Work Sheet", "display", new { id = item.User_id })
+
+        <a href="~/LeaveEmps/LeaveIndex/@item.User_id" class="btn btn-default" style=" background-color:cornflowerblue">Leave Approval</a>
+
+        <a href="~/salaryreports/SalaryView/@item.User_id" class="btn btn-default" style=" background-color:cornflowerblue">salaryreports</a>
+        <a href="~/Administrators/Time_sheet/" class="btn btn-default" style=" background-color:cornflowerblue">Time SHEET</a>
+
+
+
+
+
+
+
+
+    </td>
+</tr>
+
+    }
+
+</table>
+
+

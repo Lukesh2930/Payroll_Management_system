@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bc1e2cc88bb641bda3590005fcb0790b" Name="Diagram1">
+        <EntityTypeShape EntityType="PayModel.Administrator" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PayModel.Employee" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PayModel.LeaveEmp" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PayModel.salaryreport" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PayModel.TimeSheet" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PayModel.Worksheet" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <AssociationConnector Association="PayModel.FK__LeaveEmp__User_i__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="PayModel.FK__salaryrep__User___3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="PayModel.FK__TimeSheet__User___45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="PayModel.FK__Worksheet__User___4222D4EF" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

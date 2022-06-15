@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Payroll_Mvc.TimeSheet>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(Model => Model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.User_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.Complete_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.WorkhastobeDone)
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Complete_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkhastobeDone)
+            </td>
+
+        </tr>
+
+    }
+
+</table>
+<div>
+    <a href="~/Login/Redirect/" class="btn btn-default" style=" background-color:cornflowerblue">Back</a>
+</div>
